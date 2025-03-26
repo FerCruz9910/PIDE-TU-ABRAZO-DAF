@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Formulario de Abrazo</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            background-image: url('https://source.unsplash.com/800x600/?flowers');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px;
+        }
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            border: 2px solid #a83279;
+            border-radius: 10px;
+            background-color: rgba(255, 204, 229, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            color: #a83279;
+        }
+        button {
+            background-color: #d63384;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #c2185b;
+        }
+        label, p {
+            color: #6a0d47;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            border: 1px solid #a83279;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+        .hug-options {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 480px) {
+            .hug-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>¡Pide tu abrazo! 🤗</h2>
+        <form id="hugForm">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="age">Edad:</label>
+            <input type="number" id="age" name="age" required>
+            
+            <label>¿Quieres un abrazo?</label>
+            <div class="hug-options">
+                <input type="radio" id="yes" name="hug" value="Sí" required>
+                <label for="yes">Sí</label>
+                <input type="radio" id="no" name="hug" value="No" required>
+                <label for="no">No</label>
+            </div>
+            
+            <label for="type">Elige el tipo de abrazo:</label>
+            <select id="type" name="type" required>
+                <option value="bonito">Bonito</option>
+                <option value="romántico">Romántico</option>
+                <option value="de oso">De oso</option>
+                <option value="puchurrable">Puchurrable</option>
+            </select>
+            
+            <button type="button" onclick="sendHug()">Enviar solicitud</button>
+        </form>
+        
+        <p id="message"></p>
+    </div>
+    
+    <script>
+        function sendHug() {
+            let name = document.getElementById("name").value;
+            let age = document.getElementById("age").value;
+            let hug = document.querySelector('input[name="hug"]:checked');
+            let type = document.getElementById("type").value;
+            
+            if (!name || !age || !hug) {
+                alert("Por favor, completa todos los campos.");
+                return;
+            }
+            
+            let message = `Enviando abrazo... \nTe quiero mucho, ${name} ❤️`;
+            document.getElementById("message").innerText = message;
+            
+            // Enviar por correo
+            let mailtoLink = `mailto:fernandocruzuribe9@gmail.com?subject=Nueva%20Solicitud%20de%20Abrazo&body=Nombre:%20${name}%0AEdad:%20${age}%0AQuiere%20abrazo:%20${hug.value}%0ATipo%20de%20abrazo:%20${type}`;
+            window.location.href = mailtoLink;
+        }
+    </script>
+</body>
+</html>
+
+
